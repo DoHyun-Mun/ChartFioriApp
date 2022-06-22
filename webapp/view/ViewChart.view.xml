@@ -1,0 +1,102 @@
+<mvc:View controllerName="com.sap.chartdemo.chartdemo.controller.ViewChart"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:layout="sap.ui.layout" 
+    xmlns:form="sap.ui.layout.form"  
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data"  
+    xmlns="sap.m">
+    <layout:FixFlex id='chartLayout' minFlexSize="250" fixFirst="false">
+        <layout:flexContent>
+            <VBox id="VBox1">
+                <form:SimpleForm id="chartSimpleForm1"
+                    maxContainerCols="2" layout="ResponsiveGridLayout" title="Chart Section 1">     
+                    <form:content>               
+                        <viz:VizFrame id="idVizFrame1" uiConfig="{applicationSet:'fiori'}"
+                            height="287px" width="100%" vizType='combination'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/milk}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="Seasons"
+                                        value="{Seasons}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="Revenue"
+                                        value="{Revenue}" />
+                                    <viz.data:MeasureDefinition name="Cost"
+                                        value="{Cost}" />
+                                    <viz.data:MeasureDefinition name="Cost2"
+                                        value="{Cost2}" />
+                                    <viz.data:MeasureDefinition name="Cost1"
+                                        value="{Cost1}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+
+                        <viz:feeds>
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
+                                values="Revenue" />
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
+                                values="Cost" />
+                            <viz.feeds:FeedItem id="feedCategoryAxis" uid="categoryAxis" type="Dimension"
+                                values="Seasons" />
+                        </viz:feeds>
+                        </viz:VizFrame>   
+                        <viz:VizFrame id="idVizFrame2" uiConfig="{applicationSet:'fiori'}"
+                            height= "287px" width="100%" vizType="pie">
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset data="{/milk}">
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition name="Store Name"
+                                            value="{Store Name}" />
+                                    </viz.data:dimensions>
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition name="Revenue"
+                                            value="{Revenue}" />
+                                    </viz.data:measures>
+                                </viz.data:FlattenedDataset>
+                            </viz:dataset>
+
+                            <viz:feeds>
+                                <viz.feeds:FeedItem uid="size" type="Measure"
+                                    values="Revenue" />
+                                <viz.feeds:FeedItem uid="color" type="Dimension"
+                                    values="Store Name" />
+                            </viz:feeds>
+                        </viz:VizFrame>
+                    </form:content>
+                </form:SimpleForm>             
+                <form:SimpleForm id="chartSimpleForm2"
+                    maxContainerCols="2" layout="ResponsiveGridLayout" title="Chart Section 2">  
+                    <form:content>
+                        <viz:VizFrame id="idVizFrame3" uiConfig="{applicationSet:'fiori'}"
+                            height="287px" width="100%" vizType='area'>
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset data="{/milk}">
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition name="Week"
+                                            value="{Week}" />
+                                    </viz.data:dimensions>
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition name="Revenue"
+                                            value="{Revenue}" />
+                                        <viz.data:MeasureDefinition name="Cost"
+                                            value="{Cost}" />
+                                    </viz.data:measures>
+                                </viz.data:FlattenedDataset>
+                            </viz:dataset>
+
+                            <viz:feeds>
+                                <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
+                                    values="Revenue" />
+                                <viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension"
+                                    values="Week" />
+                            </viz:feeds>
+                        </viz:VizFrame>
+                    </form:content>
+                </form:SimpleForm>
+
+           </VBox>
+           </layout:flexContent>      
+    </layout:FixFlex> 
+</mvc:View>
