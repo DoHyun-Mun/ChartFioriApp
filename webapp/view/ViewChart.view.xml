@@ -10,7 +10,7 @@
         <layout:flexContent>
             <VBox id="VBox1">
                 <form:SimpleForm id="chartSimpleForm1"
-                    maxContainerCols="2" layout="ResponsiveGridLayout" title="Chart Section 1 - two chart">     
+                    maxContainerCols="2" layout="ResponsiveGridLayout" title="Chart Section 1 - two chart - demo 2022.06.23">     
                     <form:content>               
                         <viz:VizFrame id="idVizFrame1" uiConfig="{applicationSet:'fiori'}"
                             height="287px" width="100%" vizType='combination'>
@@ -67,7 +67,7 @@
                     </form:content>
                 </form:SimpleForm>             
                 <form:SimpleForm id="chartSimpleForm2"
-                    maxContainerCols="2" layout="ResponsiveGridLayout" title="Chart Section 2 - one chart">  
+                    maxContainerCols="2" layout="ResponsiveGridLayout" title="Chart Section 2 - one chart - demo 2022.06.23">  
                     <form:content>
                         <viz:VizFrame id="idVizFrame3" uiConfig="{applicationSet:'fiori'}"
                             height="287px" width="100%" vizType='area'>
