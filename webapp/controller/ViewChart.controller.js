@@ -183,6 +183,85 @@ sap.ui.define([
                 value: '{Cost}'
                 }]
             },
+
+            dataPath4 : "https://sapui5.hana.ondemand.com/test-resources/sap/viz/demokit/dataset/milk_production_testing_data/revenue1_revenue2_storeName",
+    
+            settingsModel4 : {
+                dataset : {
+                    name: "Dataset",
+                    defaultSelected : 1,
+                    values : [{
+                        name : "Small",
+                        value : "/small.json"
+                    },{
+                        name : "Medium",
+                        value : "/medium.json"
+                    },{
+                        name : "Large",
+                        value : "/large.json"
+                    }]
+                },
+                dataLabel : {
+                    name : "Value Label",
+                    defaultState : true
+                },
+                sumLabel: {
+                    name: "Sum Value Label",
+                    defaultState : false
+                },
+                axisTitle : {
+                    name : "Axis Title",
+                    defaultState : false
+                },
+                type : {
+                    name : "Stacked Type",
+                    defaultSelected : 0,
+                    values : [{
+                        name : "Regular",
+                        vizType : "stacked_bar",
+                        vizProperties : {
+                            plotArea: {
+                                dataLabel: {
+                                    formatString:ChartFormatter.DefaultPattern.SHORTFLOAT_MFD2
+                                }
+                            },
+                            valueAxis: {
+                                label: {
+                                    formatString:ChartFormatter.DefaultPattern.SHORTFLOAT
+                                }
+                            },
+                            valueAxis2: {
+                                label: {
+                                    formatString:ChartFormatter.DefaultPattern.SHORTFLOAT
+                                }
+                            }
+                        }
+                    },{
+                        name : "100%",
+                        vizType : "100_stacked_bar",
+                        vizProperties : {
+                            plotArea: {
+                                mode: "percentage",
+                                dataLabel: {
+                                    type: "percentage",
+                                    formatString:ChartFormatter.DefaultPattern.STANDARDPERCENT_MFD2
+                                }
+                            },
+                            valueAxis: {
+                                label: {
+                                    formatString:null
+                                }
+                            },
+                            valueAxis2: {
+                                label: {
+                                    formatString:null
+                                }
+                            }
+                        }
+                    }]
+                }
+            },
+
             onInit: function () {
                 Format.numericFormatter(ChartFormatter.getInstance());
                 var formatPattern = ChartFormatter.DefaultPattern; 
@@ -292,7 +371,56 @@ sap.ui.define([
                 var dataModel3 = new JSONModel(this.dataPath3 + "/betterMedium.json");
                 oVizFrame3.setModel(dataModel3);
 
+                /**
+                 * fourth Card
+                 */
+                var oModel4 = new JSONModel(this.settingsModel4);
+                oModel4.setDefaultBindingMode(BindingMode.OneWay);
+                this.getView().setModel(oModel4);
+
+                var oVizFrame4 = this.oVizFrame4 = this.getView().byId("idVizFrame4");
+                oVizFrame4.setVizProperties({
+                    plotArea: {
+                        dataLabel: {
+                            formatString:formatPattern.SHORTFLOAT_MFD2,
+                            visible: true,
+                            showTotal: false
+                        }
+                    },
+                    valueAxis: {
+                        label: {
+                            formatString: formatPattern.SHORTFLOAT
+                        },
+                        title: {
+                            visible: false
+                        }
+                    },
+                    valueAxis2: {
+                        label: {
+                            formatString: formatPattern.SHORTFLOAT
+                        },
+                        title: {
+                            visible: false
+                        }
+                    },
+                    categoryAxis: {
+                        title: {
+                            visible: false
+                        }
+                    },
+                    title: {
+                        visible: false,
+                        text: 'Revenue by City and Store Name'
+                    }
+                });
+                var dataModel4 = new JSONModel(this.dataPath4 + "/medium.json");
+                oVizFrame4.setModel(dataModel4);
+
                 //InitPageUtil.initPageSettings(this.getView());
+                var that = this;
+                dataModel4.attachRequestCompleted(function() {
+                    that.dataSort(this.getData());
+                });
             },
 
             initCustomFormat : function(){

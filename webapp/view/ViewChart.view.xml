@@ -93,6 +93,34 @@
                                     values="Week" />
                             </viz:feeds>
                         </viz:VizFrame>
+
+
+                        <viz:VizFrame id="idVizFrame4" uiConfig="{applicationSet:'fiori'}"
+                        height="287px" width="100%" vizType='stacked_bar'>
+                        <viz:dataset>
+                            <viz.data:FlattenedDataset data="{/milk}">
+                                <viz.data:dimensions>
+                                    <viz.data:DimensionDefinition name="Store Name"
+                                        value="{Store Name}" />
+                                    <viz.data:DimensionDefinition name="Fat Percentage"
+                                        value="{Fat Percentage}" />
+                                </viz.data:dimensions>
+                                <viz.data:measures>
+                                    <viz.data:MeasureDefinition name="Revenue"
+                                        value="{Revenue}" />
+                                </viz.data:measures>
+                            </viz.data:FlattenedDataset>
+                        </viz:dataset>
+
+                        <viz:feeds>
+                            <viz.feeds:FeedItem uid="valueAxis" type="Measure"
+                                values="Revenue" />
+                            <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                                values="Store Name" />
+                            <viz.feeds:FeedItem uid="color" type="Dimension"
+                                values="Fat Percentage" />
+                        </viz:feeds>
+                    </viz:VizFrame>
                     </form:content>
                 </form:SimpleForm>
 
